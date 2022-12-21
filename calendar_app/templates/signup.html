@@ -1,0 +1,35 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'accounts.css' %}" />
+
+<body>
+
+  <h2 class="signin-title">Event Calendar</h2>
+
+  <br>
+
+  <h3 class="signin-descr">Please make an account in order to create personalized events for yourself</h3>
+
+  <br>
+
+  <h4 class="signin-header">Sign Up</h4>
+
+  <form action="" method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      <label class="form-label" for="email">Email Address : </label>
+      {{ form.email }}
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="password">Password : </label>
+      {{ form.password1 }}
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="password">Password : </label>
+      {{ form.password2 }}
+    </div>
+
+  <br>
+
+  <h4 class="signin-header">I am already a member! <a href="{% url 'signin' %}">Sign In</a></h4>
+
+</body>
