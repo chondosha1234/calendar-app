@@ -1,0 +1,21 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'calendar_style.css' %}">
+
+<body>
+
+<div class="prev-next-container">
+    <button class="btn"><a class="month-btn" href="{% url 'calendar' %}?{{ prev_month }}">Previous Month</a></button>
+    <button class="btn"><a class="month-btn" href="{% url 'calendar' %}?{{ next_month }}">Next Month</a></button>
+</div>
+
+<br>
+
+  {{calendar}}
+
+<br>
+
+<div class="add-btn-container">
+  <button class="btn"><a class="add-event-link" href="{% url 'event_new' %}">Add Event</a></button>
+</div>
+
+</body>

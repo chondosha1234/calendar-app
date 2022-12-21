@@ -1,0 +1,22 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'calendar_style.css' %}">
+
+<body>
+
+<br>
+
+<div class="event-detail-container">
+  <p class="event-detail">{{ event.title }}</p>
+  <br>
+  <p class="event-detail">{{ event.description }}</p>
+  <br>
+  <p class="event-detail">{{ event.start_time }} -- {{ event.end_time }}</p>
+  <br>
+  <button class="btn"><a href="{% url 'delete_event' event_id %}"> Delete </a></button>
+  <br>
+  <button class="btn"><a href="{% url 'calendar' %}"> Return </a></button>
+</div>
+
+
+
+</body>
