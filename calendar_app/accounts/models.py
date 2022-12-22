@@ -27,10 +27,10 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser):
 
     email = models.EmailField(
-        _("Email Address"),
+        _(""),
         max_length=255,
         unique=True,
-        help_text="Ex: example@example.com"
+        help_text="<br><p class='example-text'>Ex: example@example.com<p>"
         )
     is_staff = models.BooleanField(
         _("Staff status"),
