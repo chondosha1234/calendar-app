@@ -1,8 +1,10 @@
+{% extends 'base.html' %}
 {% load static %}
+{% block extracss %}
 <link rel="stylesheet" type="text/css" href="{% static 'calendar_style.css' %}">
+{% endblock extracss %}
 
-<body>
-
+{% block content %}
 <br>
 
 <div class="event-detail-container">
@@ -17,6 +19,4 @@
   <button class="btn"><a href="{% url 'calendar' %}"> Return </a></button>
 </div>
 
-
-
-</body>
+{% endblock content %}

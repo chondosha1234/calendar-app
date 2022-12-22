@@ -1,7 +1,12 @@
+{% extends 'base.html' %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'accounts.css' %}" />
+{% block extracss %}
+<link rel="stylesheet" type="text/css" href="{% static 'accounts_style.css' %}" />
+{% endblock extracss %}
 
-<body>
+{% block content %}
+
+<div class="page-container">
 
   <h2 class="signin-title">Event Calendar</h2>
 
@@ -13,23 +18,16 @@
 
   <h4 class="signin-header">Sign Up</h4>
 
-  <form action="" method="post">
+  <div class="form">
+  <form action="" method="post" autocomplete="new-password">
     {% csrf_token %}
-    <div class="form-group">
-      <label class="form-label" for="email">Email Address : </label>
-      {{ form.email }}
-    </div>
-    <div class="form-group">
-      <label class="form-label" for="password">Password : </label>
-      {{ form.password1 }}
-    </div>
-    <div class="form-group">
-      <label class="form-label" for="password">Password : </label>
-      {{ form.password2 }}
-    </div>
-
+    {{ form.as_p }}
+    <button class="btn" type="submit">Sign Up</button>
+  </div>
   <br>
 
   <h4 class="signin-header">I am already a member! <a href="{% url 'signin' %}">Sign In</a></h4>
 
-</body>
+</div>
+
+{% endblock content %}

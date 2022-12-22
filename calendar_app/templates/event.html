@@ -1,9 +1,14 @@
+{% extends 'base.html' %}
 {% load static %}
+{% block extracss %}
 <link rel="stylesheet" type="text/css" href="{% static 'calendar_style.css' %}">
+{% endblock extracss %}
 
-<body>
+{% block content %}
 
-<div class="event-action-container">
+<div class="form-container">
+    <h3>Create a new event</h3>
+    <br>
     <form method="post" action="{% url 'create_event' %}">
       {% csrf_token %}
       {% for field in form %}
@@ -18,4 +23,4 @@
     <button class="btn"><a href="{% url 'calendar' %}">Return</a></button>
 </div>
 
-</body>
+{% endblock content %}
