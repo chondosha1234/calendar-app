@@ -18,6 +18,7 @@ class EventForm(ModelForm):
                 attrs={
                     "class": "form-control",
                     "type": "datetime-local",
+                    "placeholder": "Start Time 'Y-m-d H:M:S'",
                 },
                 format="%Y-%m-%dT%H:%M"
             ),
@@ -25,6 +26,7 @@ class EventForm(ModelForm):
                 attrs={
                     "class": "form-control",
                     "type": "datetime-local",
+                    "placeholder": "End Time 'Y-m-d H:M:S'",
                 },
                 format="%Y-%m-%dT%H:%M"
             ),
@@ -39,5 +41,9 @@ class EventForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(EventForm, self).__init__(*args, **kwargs)
+        self.fields["title"].label = ""
+        self.fields["start_time"].label = ""
+        self.fields["end_time"].label = ""
+        self.fields["description"].label = ""
         self.fields["start_time"].input_formats = ("%Y-%m-%dT%H:%M")
         self.fields["end_time"].input_formats = ("%Y-%m-%dT%H:%M")

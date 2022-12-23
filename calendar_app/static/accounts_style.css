@@ -20,12 +20,6 @@
   width: 30%;
 }
 
-
-label {
-  color: #ececec;
-}
-
-.example-text {
+.help-text {
   font-size: 12px;
-  padding: 0px;
 }

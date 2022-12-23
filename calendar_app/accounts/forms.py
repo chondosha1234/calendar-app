@@ -39,3 +39,7 @@ class SignUpForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+
+    def __init__(self, *args, **kwargs):
+        super(SignUpForm, self).__init__(*args, **kwargs)
+        self.fields["email"].label = ""

@@ -18,14 +18,17 @@ class SignInView(View):
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
         if form.is_valid():
-            email = form.cleaned_date["email"]
-            password = form.cleaned_date["password"]
+            email = form.cleaned_data["email"]
+            password = form.cleaned_data["password"]
             user = authenticate(email=email, password=password)
             if user:
                 login(request, user)
                 return redirect("cal:calendar")
+            else:
+                print("didnt work")
         context = {
             "form": form
+            #error
         }
         return render(request, self.template_name, context)
 

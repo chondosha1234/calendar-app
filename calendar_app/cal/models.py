@@ -14,11 +14,11 @@ class Event(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('event_details', args=[self.id])
+        return reverse('cal:event_details', args=[self.id])
 
     @property
     def get_html_url(self):
-        url = reverse('event_details', args=[self.id])
+        url = reverse('cal:event_details', args=[self.id])
         return f'<a class="event-link" href="{url}">{self.title}</a>'
 
 """
