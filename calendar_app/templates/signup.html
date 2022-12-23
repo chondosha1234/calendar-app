@@ -19,14 +19,14 @@
   <h4 class="signin-header">Sign Up</h4>
 
   <div class="form">
-  <form action="" method="post" autocomplete="new-password">
+  <form action="{% url 'accounts:signup' %}" method="post" autocomplete="new-password">
     {% csrf_token %}
     {{ form.as_p }}
     <button class="btn" type="submit">Sign Up</button>
   </div>
   <br>
 
-  <h4 class="signin-header">I am already a member! <a href="{% url 'signin' %}">Sign In</a></h4>
+  <h4 class="signin-header">I am already a member! <a href="{% url 'accounts:signin' %}">Sign In</a></h4>
 
 </div>
 

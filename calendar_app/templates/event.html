@@ -9,18 +9,14 @@
 <div class="form-container">
     <h3>Create a new event</h3>
     <br>
-    <form method="post" action="{% url 'create_event' %}">
+    <form method="post" action="{% url 'cal:create_event' %}">
       {% csrf_token %}
-      {% for field in form %}
-        <label class="form-label" for="{{ field.auto_id }}"> {{ field.label }} : </label>
-        {{ field }}
-        <br>
-      {% endfor %}
+      {{ form.as_p }}
       <button class="btn" type="submit">Submit</button>
       <br>
     </form>
     <br>
-    <button class="btn"><a href="{% url 'calendar' %}">Return</a></button>
+    <button class="btn"><a href="{% url 'cal:calendar' %}">Return</a></button>
 </div>
 
 {% endblock content %}

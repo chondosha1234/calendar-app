@@ -14,9 +14,9 @@
   <br>
   <p class="event-detail">{{ event.start_time }} -- {{ event.end_time }}</p>
   <br>
-  <button class="btn"><a href="{% url 'delete_event' event_id %}"> Delete </a></button>
+  <button class="btn"><a href="{% url 'cal:delete_event' event_id %}"> Delete </a></button>
   <br>
-  <button class="btn"><a href="{% url 'calendar' %}"> Return </a></button>
+  <button class="btn"><a href="{% url 'cal:calendar' %}"> Return </a></button>
 </div>
 
 {% endblock content %}
