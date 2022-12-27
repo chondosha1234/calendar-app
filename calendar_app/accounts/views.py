@@ -26,6 +26,8 @@ class SignInView(View):
                 return redirect("cal:calendar")
             else:
                 print("didnt work")
+        else:
+            print("invalid")
         context = {
             "form": form
             #error
@@ -35,7 +37,7 @@ class SignInView(View):
 
 def signout(request):
     logout(request)
-    return redirect("signin")
+    return redirect("accounts:signin")
 
 
 class SignUpView(View):
@@ -53,7 +55,9 @@ class SignUpView(View):
         form = self.form_class(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("signin")
+            return redirect("accounts:signin")
+        else:
+            print("Invalid")
         context = {
             'form': form,
         }

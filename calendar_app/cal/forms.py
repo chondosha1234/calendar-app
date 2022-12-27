@@ -1,5 +1,5 @@
 from django.forms import ModelForm, DateInput
-from cal.models import Event
+from cal.models.event import Event
 from django import forms
 
 

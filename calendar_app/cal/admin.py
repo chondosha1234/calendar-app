@@ -1,5 +1,5 @@
 from django.contrib import admin
-from cal.models import Event
+from cal.models.event import Event
 
 class EventAdmin(admin.ModelAdmin):
     pass

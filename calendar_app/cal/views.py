@@ -4,9 +4,11 @@ from django.http import HttpResponseRedirect
 from django.utils.safestring import mark_safe
 from datetime import timedelta, datetime, date
 from django.urls import reverse
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 import calendar
 
-from cal.models import Event
+from cal.models.event import Event
 from cal.utils import Calendar
 from cal.forms import EventForm
 
@@ -29,27 +31,27 @@ def next_month(d):
     month = f"month={str(next_month.year)}-{str(next_month.month)}"
     return month
 
-class CalendarView(ListView):
+class CalendarView(LoginRequiredMixin, ListView):
+    login_url = "accounts:signin" #where users will be redirected to if unsuccessful
     model = Event
     template_name = 'calendar.html'
-    #form_class = EventForm
 
+    #override method in order to add more to context than the generic event_list of objects
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         d = get_date(self.request.GET.get("month", None))
         cal = Calendar(d.year, d.month)
-        html_cal = cal.formatmonth(withyear=True)
-        #forms = self.form_class()
+        html_cal = cal.formatmonth(self.request.user, withyear=True)
 
         context['calendar'] = mark_safe(html_cal)
         context['prev_month'] = prev_month(d)
         context['next_month'] = next_month(d)
-        #context['forms'] = forms
         return context
 
 """
 View for page to create new event.
 """
+@login_required(login_url="signup")  #redirects user if not logged in
 def event_new(request):
     form = EventForm()
     context = {
@@ -70,13 +72,13 @@ def create_event(request):
         start_time = form.cleaned_data["start_time"]
         end_time = form.cleaned_data["end_time"]
         Event.objects.get_or_create(
-            #user
+            user=request.user,
             title=title,
             description=description,
             start_time=start_time,
             end_time=end_time
         )
-        return HttpResponseRedirect(reverse("calendar"))
+        return HttpResponseRedirect(reverse("cal:calendar"))
 
     context = {
         "form": form
@@ -87,6 +89,7 @@ def create_event(request):
 """
 View for seeing details of an event.
 """
+@login_required(login_url="accounts:signup")
 def event_details(request, event_id):
     event = Event.objects.get(id=event_id)
     context = {
@@ -102,4 +105,4 @@ View to remove an event. Triggered from event details and reroutes to calendar.
 def delete_event(request, event_id):
     event = Event.objects.get(id=event_id)
     event.delete()
-    return HttpResponseRedirect(reverse("calendar"))
+    return HttpResponseRedirect(reverse("cal:calendar"))
